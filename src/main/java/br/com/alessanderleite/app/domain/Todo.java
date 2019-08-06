@@ -98,4 +98,10 @@ public class Todo {
 	public void setLastModifiedBy(String lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
+
+	@Override
+	public String toString() {
+		return "Todo [id=" + id + ", description=" + description + ", status=" + status + ", createdDate=" + createdDate
+				+ "]";
+	}
 }
