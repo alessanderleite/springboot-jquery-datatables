@@ -1,4 +1,4 @@
-package br.com.alessanderleite.app.domain.web;
+package br.com.alessanderleite.app.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
