@@ -15,7 +15,7 @@ public class TodoController {
 	@Autowired
 	private TodoRepository repository;
 	
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = {"/","/login"})
 	public String login() {
 		return "login";
 	}
