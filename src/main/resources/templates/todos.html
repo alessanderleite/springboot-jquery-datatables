@@ -1,36 +1,68 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymelead.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymelead.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title>StudentList</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<title>StudentList</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link type="text/css" rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet"
+	th:href="@{https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css}" />
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
 </head>
 <body>
 	<div class="col-md-4">
 		<h1>Todos</h1>
 	</div>
 	<div class="col-md-4">
-		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+		<h3 th:inline="text">Welcome
+			[[${#httpServletRequest.remoteUser}]]</h3>
 	</div>
-	<div class="col-md-4" style="padding:20px 0">
+	<div class="col-md-4" style="padding: 20px 0">
 		<form th:action="@{/logout}" method="post"></form>
-			<input type="submit" value="Sign Out" class="btn btn-danger" />
+		<input type="submit" value="Sign Out" class="btn btn-danger" />
 	</div>
-	
-	<table class="table table-striped">
-		<tr>
-			<th>Description</th>
-			<th>Status</th>
-			<th>CreatedDate</th>
-			<th>CreatedBy</th>
-		</tr>
-		<tr th:each = "todo : ${todolist}">
-			<th th:text="${todo.description}"></th>
-			<th th:text="${todo.status}"></th>
-			<th th:text="${#dates.format(todo.createdDate, 'dd-MM-yyyy HH:mm')}"></th>
-			<th th:text="${todo.createdBy}"></th>
-		</tr>
+
+	<table id="todotable" class="table table-striped">
+		<thead>
+			<tr>
+				<th>Description</th>
+				<th>Status</th>
+				<th>CreatedDate</th>
+				<th>CreatedBy</th>
+			</tr>
+		</thead>
 	</table>
+
 	<a href="/add" class="btn btn-primary">Add Todo</a>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#todotable').DataTable({
+				"ajax" : {
+					"url" : "data/gettodos",
+					"dataSrc" : ""
+				},
+				"columns" : [ {
+					"data" : "description"
+				}, {
+					"data" : "status"
+				}, {
+					"data" : "createdDate"
+				}, {
+					"data" : "createdBy"
+				} ]
+			});
+		});
+	</script>
 </body>
+
 </html>
